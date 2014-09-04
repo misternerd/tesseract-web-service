@@ -4,7 +4,7 @@ import tornado.ioloop
 import tornado.web
 import optparse
 import pprint
-import Image
+from PIL import Image
 import StringIO
 import os
 import uuid

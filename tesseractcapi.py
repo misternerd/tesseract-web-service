@@ -25,7 +25,7 @@ import ctypes
 from ctypes import pythonapi, util, py_object
 import StringIO
 import urllib, cStringIO
-import Image
+from PIL import Image
 
 """
 Get result string directly from tesseract C API
@@ -33,7 +33,7 @@ Get result string directly from tesseract C API
 class TesseactWrapper:
     def __init__(self, lang, libpath, tessdata):
         libname = libpath + "/libtesseract.so.3.0.2"
-        libname_alt = "/libtesseract.so.3"
+        libname_alt = libpath + "/libtesseract.so.3"
 
         try:
             self.tesseract = ctypes.cdll.LoadLibrary(libname)
