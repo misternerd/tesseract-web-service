@@ -73,9 +73,8 @@ class TesseactWrapper:
         # Running tesseract-ocr
         text_out = self.tesseract.TessBaseAPIProcessPages(self.api, filePath, None, 0)
         result_text = ctypes.string_at(text_out)
-        print 'Result: ', result_text
 
-        return result_text.replace("\n", "")
+        return result_text
 
     def imageUrlToString(self, url, minWidth):
 

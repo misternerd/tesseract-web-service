@@ -36,7 +36,7 @@ class FileUploadHandler(tornado.web.RequestHandler):
                     '<pre class="prettyprint">')
  
     def post(self):
-        self.set_header("Content-Type", "text/html")
+        self.set_header("Content-Type", "text/plain; charset=utf-8")
         self.write("") 
         # create a unique ID file
         tempname = str(uuid.uuid4()) + ".png"
@@ -60,15 +60,11 @@ class FileUploadHandler(tornado.web.RequestHandler):
 
         # do OCR, print result
         global wrapper
-        result = wrapper.imageFileToString(tmpFilePath)
+        result = unicode(wrapper.imageFileToString(tmpFilePath), "utf-8")
 
         # remove tmp image file
         self.cleanup(tmpFilePath)
 
-        if "." not in result and " " in result:
-            result = result.replace(" ", ".")
-        else:
-            result = result.replace(" ", "")
         self.write(result)
         self.write("")
 
@@ -127,7 +123,7 @@ class ImageUrlHandler(tornado.web.RequestHandler):
         response = { 'result': result, 'url': url }
         self.write(response)
 
-        print response
+#        print response
 
  
 settings = {
